@@ -17,6 +17,7 @@ public:
 
 	inline size_type taskCount() const { return _task.size(); }
 	inline size_type varSize() const { return _varSize; }
+	inline size_type varCount() const { return getC(taskCount(), varSize()); }
 
 	// TEMP
 	inline size_type currVar() const { return _currVar; }
