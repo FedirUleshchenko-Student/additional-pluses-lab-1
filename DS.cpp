@@ -19,7 +19,7 @@ DS::DS(vector<return_type> list, size_type task_cnt) :
 }
 
 DS::pos_type DS::getC(pos_type n, pos_type k) {
-	if (k < 0 || k > n) return 0;
+	if (k > n) return 0;
 	if (k == 0 || k == n) return 1;
 
 	// C(n, k) == C(n, n - k)
