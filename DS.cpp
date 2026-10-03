@@ -86,6 +86,9 @@ DS::size_type DS::searchMovePosition
 }
 
 DS::return_type DS::operator()() {
+	if (_currVar >= _vars.size())
+		throw domain_error("All of task variants are used. Cannot get more");
+
 	pos_type id = _vars[_currVar++];
 	// size_type ??
 	pos_type tasksRemained = taskCount();
@@ -100,7 +103,7 @@ DS::return_type DS::operator()() {
 	while ((pmove = searchMovePoint(tasksRemained, pointersRemained, id)) !=
 		pointersRemained + 1) {
 		// rework
-		for (int i = taskCount() - tasksRemained + 1; i < pmove; i++)
+		for (pos_type i = taskCount() - tasksRemained + 1; i < pmove; i++)
 			ans_pos.push_back(i);
 
 		tasksRemained -= pmove - 1;
@@ -113,8 +116,9 @@ DS::return_type DS::operator()() {
 	}
 
 	return_type ans;
+	ans = format("currVar = {}({}) : ", _currVar - 1, _vars[_currVar - 1]);
 	for (auto x : ans_pos) {
-		ans += _task[x] + '\n' + '\n';
+		ans += _task[x - 1] + ' ';
 	}
 	return ans;
 }

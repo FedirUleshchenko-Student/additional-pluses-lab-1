@@ -1,4 +1,8 @@
 #pragma once
+#include <string>
+#include <vector>
+#include <deque>
+
 class DS
 {
 private:
@@ -13,6 +17,9 @@ public:
 
 	inline size_type taskCount() const { return _task.size(); }
 	inline size_type varSize() const { return _varSize; }
+
+	// TEMP
+	inline size_type currVar() const { return _currVar; }
 
 	return_type operator()();
 
