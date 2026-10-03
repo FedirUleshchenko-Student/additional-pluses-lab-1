@@ -38,14 +38,15 @@ DS::pos_type DS::getC(pos_type n, pos_type k) {
 // Count starts from 1
 DS::size_type DS::searchMovePoint
 (size_type tasksRemained, size_type pointersRemained, const pos_type& pos) const {
-	size_type l = 0, r = pointersRemained;
+	size_type l = 0, r = pointersRemained + 1;
 	size_type t;
 	while (l + 1 < r) {
 		t = midpoint(l, r);
 
 		// if vars starts from 0 -> <=
-		if (getC(tasksRemained - t, pointersRemained - t) < pos) l = t;
-		else r = t;
+		if (((pointersRemained - t) ? getC(tasksRemained - t, pointersRemained - t) : 0)
+			< pos) r = t;
+		else l = t;
 	}
 	return r;
 }
@@ -56,6 +57,10 @@ DS::size_type DS::searchMovePoint
 // starting position of movable task COUNTS in tasksRemained variable
 DS::size_type DS::searchMovePosition
 (size_type tasksRemained, size_type pointersRemained, pos_type& pos) const {
+	if (pointersRemained == 0) {
+		return pos - 1;
+	}
+
 	size_type l = 0;
 	size_type r = tasksRemained - 1;
 	size_type t;
@@ -69,12 +74,13 @@ DS::size_type DS::searchMovePosition
 		//	k+1				 k		k
 		// C	=  SUM[from C   to C  ]
 		//	n+1				 k		n
-		if (maxVar - getC(tasksRemained, pointersRemained + 1 - t)
-			< pos) l = t;
+		if (maxVar - getC(tasksRemained - t, pointersRemained + 1 - t)
+			<= pos) l = t;
 		else r = t;
 	}
 
-	pos -= maxVar - getC(tasksRemained, pointersRemained + 1 - l);
+	pos -= maxVar - getC(tasksRemained - l, pointersRemained + 1);
+	//pos--;
 
 	return l;
 }
@@ -94,21 +100,21 @@ DS::return_type DS::operator()() {
 	while ((pmove = searchMovePoint(tasksRemained, pointersRemained, id)) !=
 		pointersRemained + 1) {
 		// rework
-		for (int i = 1; i < pmove; i++) ans_pos.push_back(i);
+		for (int i = taskCount() - tasksRemained + 1; i < pmove; i++)
+			ans_pos.push_back(i);
 
 		tasksRemained -= pmove - 1;
 		pointersRemained -= pmove;
 
 		ppos = searchMovePosition(tasksRemained, pointersRemained, id);
-		tasksRemained -= pmove - 1;
+		tasksRemained -= ppos + 1;
 
-		ans_pos.push_back(ppos);
-
+		ans_pos.push_back(((ans_pos.empty() ? 0 : ans_pos.front()) + 1) + ppos);
 	}
 
 	return_type ans;
 	for (auto x : ans_pos) {
-		ans += _vars[x] + '\n' + '\n';
+		ans += _task[x] + '\n' + '\n';
 	}
 	return ans;
 }
