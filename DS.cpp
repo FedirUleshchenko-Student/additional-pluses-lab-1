@@ -4,9 +4,6 @@
 #include <exception>
 #include <random>
 
-#include <format>
-#include <iostream>
-
 using namespace std;
 
 DS::DS(vector<return_type> list, size_type task_cnt) :
@@ -31,8 +28,6 @@ DS::pointer_type DS::getC(pointer_type n, pointer_type k) {
 	return result;
 }
 
-// returns first left pointer that MOVES
-// Count starts from 1
 DS::size_type DS::searchMovePoint(const size_type& tasksRemained,
 	const size_type& pointersRemained, const pointer_type& id) const {
 	pointer_type l = 0, r = pointersRemained + 1;
@@ -46,10 +41,6 @@ DS::size_type DS::searchMovePoint(const size_type& tasksRemained,
 	return r;
 }
 
-// returns the amount of positions to move right the movable pointer
-// 
-// movable task DOES NOT count in pointersRemained
-// starting position of movable task COUNTS in tasksRemained variable
 DS::size_type DS::searchMovePosition(const size_type& tasksRemained,
 	const size_type& pointersRemained, const pointer_type& id) const {
 	if (pointersRemained == 0) return id - 1;
@@ -99,9 +90,14 @@ DS::return_type DS::operator()() {
 	}
 
 	return_type ans;
-	ans = format("currVar = {}({}) : ", _currId, _ids[_currId - 1]);
 	for (auto x : ans_pos) {
-		ans += _tasks[x - 1] + ' ';
+		ans += _tasks[x - 1] + "\n\n";
 	}
 	return ans;
+}
+
+std::strong_ordering DS::operator<=>(const DS& other) const{
+	if (varSize() != other.varSize() || taskCount() != other.taskCount())
+		throw invalid_argument("cannot compare 2 classes on different data size");
+	return { _currId <=> other._currId };
 }
