@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <format>
 #include <vector>
+#include <filesystem>
 #include "funcs.h"
 
 using namespace std;
@@ -14,14 +15,25 @@ int main(int argc, char* argv[])
 		// STRESS TEST
 		if (argc == 1)
 		{
-			int testsCnt = 8;
-			for (int i = 1; i <= testsCnt; i++) {
-				ifstream fi(format("input{}{}.txt", '\\', i));
+			auto pi = filesystem::path("input");
+			if(!filesystem::is_directory(pi) || filesystem::is_empty(pi))
+				throw runtime_error("cannot open the input directory");
+
+			auto po = filesystem::path("output");
+			if (!filesystem::is_directory(pi))
+				throw runtime_error("there is no such directory as output & cannot create one");
+
+			if(!filesystem::exists(po))
+				filesystem::create_directory(po);
+
+			for (const auto x : filesystem::directory_iterator(pi)) {
+				ifstream fi(x.path());
 				if (!fi.is_open())
-					throw runtime_error("cannot open input file");
-				ofstream fo(format("output{}{}.txt", '\\', i));
+					throw runtime_error(format("cannot open input file : {}", x.path().string()));
+				ofstream fo(filesystem::path(po) / filesystem::path(x).filename());
 				if (!fo.is_open())
-					throw runtime_error("cannot open output file");
+					throw runtime_error(format("cannot open output file : {}",
+						(filesystem::path(po) / filesystem::path(x).filename()).string()));
 
 				evaluateAllVariants(fi, fo);
 			}
