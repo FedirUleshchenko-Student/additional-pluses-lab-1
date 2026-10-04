@@ -1,3 +1,4 @@
+// MSVC (Microsoft Visual C++)
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
