@@ -1,0 +1,43 @@
+How many triangles fit in one square?
+
+How many angles does a circle contain?
+
+Two vectors with coordinates (0; 1; 8) and (3; 5; 1) are given. Find the answer to the question of whether it is worth erasing the condition when you go to the blackboard?
+
+Indicate the schedule of the faculty coffee shop near the stairs and answer the question of how many sausages go into hot dogs per day.
+
+How many obtuse angles exist, list each of them.
+
+Is it possible to solve the equation of a circle if it asks why lines do not like it?
+
+What is the formula for calculating the distance between points if one of them is a kitty and the other is a dog?
+
+Can a point become a vertex if its coordinates are very stubborn and do not want to change?
+
+If we could connect three points in one place, would a new geometric shape appear?
+
+If the angle between two vectors is 180 degrees, does it mean they are quarreling?
+
+What do you call a line that connects point A to point B, if A always forgets about B?
+
+Describe the worst and the best combination of ice cream flavors, prove your point.
+
+Indicate the application of a doghouse in linear algebra.
+
+Who runs this neighborhood?
+
+How much coffee with energy drinks do you need to drink to get the maximum heartbeat speed and not die?
+
+How much does a McCrispy cost today?
+
+If a triangle has 3 angles of 90 degrees each, what kind of oval is it?
+
+You were bitten by a vampire, a zombie, and a werewolf, who will you become?
+
+How much pizza and tea must you bring to the next class to get the maximum score for the module? (more than 1)
+
+Where is the cat?
+
+What is the difference between KNU and a trolleybus?
+
+Explain why you cannot combine coffee with strawberry yogurt.
