@@ -1,7 +1,7 @@
 #include "DS.h"
 #include <numeric>
 #include <algorithm>
-#include <exception>
+#include <stdexcept>
 #include <random>
 
 using namespace std;
