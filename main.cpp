@@ -58,6 +58,20 @@ int main(int argc, char* argv[])
 				variantSize = readVariantSize(cin);
 				data = loadQuestions(f);
 			}
+			else if (argc == 3)
+			{
+				string filename = argv[1];
+				ifstream f(filename);
+				if (!f.is_open())
+				{
+					throw runtime_error("cannot open file: " + filename);
+				}
+				cout << "opened" << endl;
+				variantSize = stoi(argv[2]);
+				cout << "readed " << endl;
+
+				data = loadQuestions(f);
+			}
 			else
 			{
 				cout << "Enter variant size: ";
