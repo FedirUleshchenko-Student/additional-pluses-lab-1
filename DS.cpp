@@ -9,7 +9,7 @@ using namespace std;
 DS::DS(vector<return_type> list, size_type task_cnt) :
 	_tasks(list), _varSize(task_cnt), _currId(0), _ids(getC(list.size(), task_cnt)) {
 	iota(_ids.begin(), _ids.end(), 1); // start from 1
-	shuffle(_ids.begin(), _ids.end(), mt19937(random_device()()));
+	shuffle(_ids.begin(), _ids.end(), mt19937_64(random_device()()));
 }
 
 DS::pointer_type DS::getC(pointer_type n, pointer_type k) {
